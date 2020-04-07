@@ -22,13 +22,13 @@ export default function Incidents() {
 
     async function loadIncidents() {
         // If a request is in process, don't "load" again
-        if(loading) {
-            return;
+        if(loading) { 
+            return; 
         }
 
         // If total of incidents has been reached, return
-        if(total > 0 && incidents.length === total) {
-            return;
+        if(total > 0 && incidents.length === Number(total)) {  
+            return; 
         }
 
         setLoading(true);
@@ -39,7 +39,7 @@ export default function Incidents() {
         setIncidents([...incidents, ...response.data]);  // attach current incident's array with new data array
         setTotal(response.headers['x-total-count']);
 
-        setPage(page + 1);
+        setPage(page + 1); 
         setLoading(false);
     }
 
@@ -65,7 +65,7 @@ export default function Incidents() {
                 keyExtractor={incident => String(incident.id)}
                 // showsVerticalScrollIndicator={false}
                 onEndReached={loadIncidents}
-                onEndReachedThreshold={0.2}  // 20%
+                // onEndReachedThreshold={0.2}  // 20%
                 renderItem={({ item: incident }) => (
                     <View style={styles.incident}>
                         <Text style={styles.incidentProperty}>ONG:</Text>
